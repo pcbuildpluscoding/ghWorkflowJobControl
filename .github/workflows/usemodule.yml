@@ -62,9 +62,12 @@ jobs:
         id: build-website
         run: npm run build
       - name: Upload artifacts
-        uses: ./.github/workflows/reusable.yml
+        uses: actions/upload-artifact@v3
         with:
-          artifact-name: dist-files
+          name: dist-files
+          path: dist
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
+    with:
+      artifact-name: dist-files
